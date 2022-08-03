@@ -1,4 +1,5 @@
-# 100daysofcode
+# 100daysofcode - Python Edition
+
 Journey to learn Python over 100 days of projects. Give or take.
 Hi, my name is Charles and this repository is a culmination of both
 learning how to code in Python and learning how to use Git.
