@@ -50,6 +50,7 @@ while game_is_on:
     for i in range(0, len(drivers_list)):
         if player.distance(drivers_list[i]) < 15:
             game_is_on = False
+            scoreboard.game_over()
 
 
 
