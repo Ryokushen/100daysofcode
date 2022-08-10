@@ -1,9 +1,9 @@
 from turtle import Turtle
-from random import choice, random, randrange
+from random import choice, randrange
 
 COLORS = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
 STARTING_MOVE_DISTANCE = 5
-MOVE_INCREMENT = 10
+MOVE_INCREMENT = 5
 
 
 class Car(Turtle):
@@ -15,11 +15,15 @@ class Car(Turtle):
         self.color(choice(COLORS))
         self.goto(300, (randrange(-230, 230)))
 
-
     def car_drive(self):
-        self.fd(MOVE_INCREMENT)
+        self.fd(STARTING_MOVE_DISTANCE)
 
     def car_reset(self):
         self.goto(300, (randrange(-230, 230)))
+
+    def increase_speed(self):
+        global STARTING_MOVE_DISTANCE
+        STARTING_MOVE_DISTANCE += MOVE_INCREMENT
+
 
 

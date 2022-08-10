@@ -43,6 +43,8 @@ while game_is_on:
     if player.ycor() >= FINISH_LINE_Y:
         player.starting_position()
         scoreboard.update_score()
+        if i in range(0, len(drivers_list)):
+            drivers_list[i].increase_speed()
 
 # Detect collisions
     for i in range(0, len(drivers_list)):
