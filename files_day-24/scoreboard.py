@@ -10,7 +10,7 @@ class Scoreboard(Turtle):
         self.speed('fastest')
         self.score = 0
         with open('data.txt') as data:
-            self.highscore = data.read()
+            self.highscore = int(data.read())
         self.goto(100, 275)
         self.update_scoreboard()
 
