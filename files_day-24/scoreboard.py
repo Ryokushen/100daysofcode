@@ -1,7 +1,5 @@
 from turtle import Turtle
 
-with open('my_file.txt') as file:
-    highest_score = file.read()
 
 class Scoreboard(Turtle):
     def __init__(self):
@@ -11,7 +9,8 @@ class Scoreboard(Turtle):
         self.penup()
         self.speed('fastest')
         self.score = 0
-        self.highscore = int(highest_score)
+        with open('data.txt') as data:
+            self.highscore = data.read()
         self.goto(100, 275)
         self.update_scoreboard()
 
@@ -23,8 +22,8 @@ class Scoreboard(Turtle):
     def reset(self):
         if self.score > self.highscore:
             self.highscore = self.score
-            with open('my_file.txt', mode='w') as file:
-                file.write(f'{self.highscore}')
+            with open('data.txt', mode='w') as data:
+                data.write(f'{self.highscore}')
         self.score = 0
         self.update_scoreboard()
 

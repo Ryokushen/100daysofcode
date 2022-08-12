@@ -1,4 +1,4 @@
-# with open('my_file.txt') as file:
+# with open('data.txt') as file:
 #     contents = file.read()
 #     print(contents)
 
