@@ -9,7 +9,7 @@
 
 for names in open('Input\\Names\\invited_names.txt', mode='r'):
     ndot = names.strip()
-    with open('Input\\Letters\\starting_letter.txt', mode='r') as template1, open(f'Output\\ReadyToSend\\{ndot}.txt', 'w') as template2:
+    with open('Input\\Letters\\starting_letter.txt', mode='r') as template1, open(f'Output\\ReadyToSend\\letter_for_{ndot}.txt', 'w') as template2:
         for line in template1.readlines():
             template2.write(line.replace(f'[name]', ndot))
 
