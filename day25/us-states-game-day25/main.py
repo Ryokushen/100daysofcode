@@ -14,11 +14,13 @@ data = pandas.read_csv('50_states.csv')
 data_states = data.state
 list_of_states = data_states.to_list()
 
-correct = []
+guessed_states = []
 
 
-while len(correct) < 50:
-    answer_state = screen.textinput(title=f'{len(correct)}/50 Correct', prompt="What's another state's name?").title()
+while len(guessed_states) < 50:
+    answer_state = screen.textinput(title=f'{len(guessed_states)}/50 Correct', prompt="What's another state's name?").title()
+    if answer_state == 'Exit':
+        break
     for state in list_of_states:
         # Compare input to list of states in CSV
         if state == answer_state:
@@ -26,12 +28,17 @@ while len(correct) < 50:
             state_xcoord = int(data[data_states == state].x)
             state_ycoord = int(data[data_states == state].y)
             # Add correct guess to list to keep track of score
-            correct.append(state)
+            guessed_states.append(state)
             writing = State()
             writing.goto(x=state_xcoord, y=state_ycoord)
             writing.write(f'{state}')
-        else:
-            continue
+
+# Makes list of states you miss
+missed_states = []
+for state in list_of_states:
+    if state not in guessed_states:
+        missed_states.append(state)
+        states_to_learn = pandas.DataFrame(missed_states)
+        states_to_learn.to_csv('states_to_learn.csv')
 
 
-screen.exitonclick()
