@@ -1,3 +1,4 @@
+import time
 from tkinter import *
 import math
 # ---------------------------- CONSTANTS ------------------------------- #
@@ -38,10 +39,6 @@ def start_timer():
         work_sec = WORK_MIN * 60
         count_down(work_sec)
         timer_label.config(fg=GREEN, text='Work')
-
-
-
-
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
@@ -87,7 +84,15 @@ canvas.create_image(100, 112, image=tomato_ing)
 timer_text = canvas.create_text(100, 130, text='00:00', fill="white", font=(FONT_NAME, 35, 'bold'))
 canvas.grid(column=1, row=1)
 
+# ---------------------------PAUSE-------------------------------------#
+def pause():
+    window.after(60000)
 
+
+
+
+pause_button = Button(text='Pause', command=pause)
+pause_button.grid(column=1, row=5)
 
 
 
