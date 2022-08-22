@@ -50,33 +50,36 @@ def generate_password():
 
 window = Tk()
 
-window.title('Python Password Manager')
-window.config(padx=40, pady=20, bg='steelblue')
+window.title('The Saiyan Vault')
+window.config(padx=40, pady=20, bg='black')
 
 
-canvas = Canvas(width=200, height=200, background='lightyellow', highlightthickness=6, highlightbackground='gold')
-passwordgen = PhotoImage(file='python.png')
-canvas.create_image(100, 100, image=passwordgen)
+canvas = Canvas(width=186, height=150, background='royalblue', highlightthickness=8, highlightbackground='royalblue')
+passwordgen = PhotoImage(file='saiyanvault1.png')
+canvas.create_image(100, 81, image=passwordgen)
 canvas.grid(column=1, row=0)
 
-website_label = Label(text='Website:', bg="steelblue", font=("Harrington", 12, 'bold'), fg='white')
+saiyan = Label(text="Retain the power,\n unleash the fury.\nThere is no \nescaping the vault...", font=("Harrington", 12, "italic"), fg="royalblue", bg='black')
+saiyan.grid(column=0, row=0)
+
+website_label = Label(text='Website:', bg="black", font=("Courier", 12, 'bold'), fg='royalblue')
 website_label.grid(column=0, row=1)
-input_website = Entry(width=54)
+input_website = Entry(width=56)
 input_website.focus()
 input_website.grid(row=1, column=1, columnspan=2)
 
-email_usn = Label(text="Email/Username:", bg="steelblue", font=("Harrington", 12, 'bold'), fg='white')
+email_usn = Label(text="Email/Username:", bg="black", font=("Courier", 12, 'bold'), fg='royalblue')
 email_usn.grid(column=0, row=2)
-input_email = Entry(width=54)
+input_email = Entry(width=56)
 input_email.insert(0, "example@gmail.com")
 input_email.grid(row=2,column=1, columnspan=2)
 
-password = Label(text="Password:", bg="steelblue", font=("Harrington", 12, 'bold'), fg='white')
+password = Label(text="Password:", bg="black", font=("Courier", 12, 'bold'), fg='royalblue')
 password.grid(column=0, row=3)
-input_password = Entry(width=35)
+input_password = Entry(width=37)
 input_password.grid(column=1, row=3)
 
-add_button = Button(text="Add", width=46, command=data_entry)
+add_button = Button(text="Add", width=47, command=data_entry)
 add_button.grid(row=4, column=1, columnspan=2)
 
 generate_pass = Button(text="Generate Password", height=1, command=generate_password)
