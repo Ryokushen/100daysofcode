@@ -1,37 +1,86 @@
 from tkinter import *
+from tkinter import messagebox
+from random import choice, randint, shuffle
+import pyperclip
+# ------------------------------Password Data Entry--------------------------------#
 
-#--------------------------UI SETUP-----------------------------------#
+
+def data_entry():
+    website = input_website.get()
+    email = input_email.get()
+    password_create = input_password.get()
+
+    if len(website) and len(password_create) and len(email) != 0:
+        is_ok = messagebox.askokcancel(title=website, message=f"Is this data correct?:\nEmail: {email} "
+                                                          f"\nPassword: {password_create}")
+        with open("data.txt", "a") as template:
+            template.write(f"{website} | {email} | {password_create} \n")
+            delete()
+    else:
+        empty_datafield = messagebox.showwarning(title="Empty Input",
+                                             message='Please don\'t leave any necessary fields empty.')
+
+
+def delete():
+    input_website.delete(0, END)
+    input_password.delete(0, END)
+
+# -------------------------------Password Generator--------------------------------#
+
+
+def generate_password():
+
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+
+    password_list = [(choice(letters)) for _ in range(randint(6, 8))]
+    password_list += [(choice(symbols)) for _ in range(randint(2, 4))]
+    password_list += [(choice(numbers)) for _ in range(randint(2, 4))]
+
+    shuffle(password_list)
+
+    password = "".join(password_list)
+
+    input_password.delete(0, END)
+    input_password.insert(0, password)
+    pyperclip.copy(password)
+# --------------------------UI SETUP-----------------------------------#
+
+
 window = Tk()
-window.title('Password Manager')
-window.config(padx=20, pady=20, bg='lightblue')
+
+window.title('Python Password Manager')
+window.config(padx=40, pady=20, bg='steelblue')
 
 
-canvas = Canvas(width=350, height=350, bg='lightblue', highlightthickness=10, highlightbackground='grey')
-passwordgen = PhotoImage(file='python.png.png')
-canvas.create_image(175, 175, image=passwordgen)
-canvas.grid(column=1, row=1)
+canvas = Canvas(width=200, height=200, background='lightyellow', highlightthickness=6, highlightbackground='gold')
+passwordgen = PhotoImage(file='python.png')
+canvas.create_image(100, 100, image=passwordgen)
+canvas.grid(column=1, row=0)
 
+website_label = Label(text='Website:', bg="steelblue", font=("Harrington", 12, 'bold'), fg='white')
+website_label.grid(column=0, row=1)
+input_website = Entry(width=54)
+input_website.focus()
+input_website.grid(row=1, column=1, columnspan=2)
 
+email_usn = Label(text="Email/Username:", bg="steelblue", font=("Harrington", 12, 'bold'), fg='white')
+email_usn.grid(column=0, row=2)
+input_email = Entry(width=54)
+input_email.insert(0, "example@gmail.com")
+input_email.grid(row=2,column=1, columnspan=2)
 
+password = Label(text="Password:", bg="steelblue", font=("Harrington", 12, 'bold'), fg='white')
+password.grid(column=0, row=3)
+input_password = Entry(width=35)
+input_password.grid(column=1, row=3)
 
+add_button = Button(text="Add", width=46, command=data_entry)
+add_button.grid(row=4, column=1, columnspan=2)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+generate_pass = Button(text="Generate Password", height=1, command=generate_password)
+generate_pass.grid(column=2, row=3)
 
 
 window.mainloop()
