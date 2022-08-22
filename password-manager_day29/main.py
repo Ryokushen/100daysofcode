@@ -17,8 +17,8 @@ def data_entry():
             template.write(f"{website} | {email} | {password_create} \n")
             delete()
     else:
-        empty_datafield = messagebox.showwarning(title="Empty Input",
-                                             message='Please don\'t leave any necessary fields empty.')
+        messagebox.showwarning(title="Empty Input",
+                                message='Please don\'t leave any necessary fields empty.')
 
 
 def delete():
