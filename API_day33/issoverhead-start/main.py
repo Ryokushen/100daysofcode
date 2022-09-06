@@ -1,7 +1,10 @@
+from ast import While
 import email
 import requests
 from datetime import datetime
 from smtplib import SMTP
+import schedule
+import time
 
 MY_LAT = 36.755169 # Your latitude
 MY_LONG = -76.237442 # Your longitude
@@ -37,14 +40,20 @@ time_now = datetime.now()
 current_hour = time_now.hour
 # BONUS: run the code every 60 seconds.
 
-if compare_pos() == True and sunset < current_hour < sunrise:
-    with SMTP("smtp.gmail.com", port=587) as template:
-        template.starttls()
-        template.login(user=MY_EMAIL, password=MY_PASSWORD)
-        template.sendmail(from_addr=MY_EMAIL, to_addrs='ryokushen37@yahoo.com',
-        msg="Subject:International Space Station\n\n The ISS is above you. Look Outside! :)")
+def iss_check():
+    if compare_pos() == True and sunset < current_hour < sunrise:
+        with SMTP("smtp.gmail.com", port=587) as template:
+            template.starttls()
+            template.login(user=MY_EMAIL, password=MY_PASSWORD)
+            template.sendmail(from_addr=MY_EMAIL, to_addrs='ryokushen37@yahoo.com',
+            msg="Subject:International Space Station\n\n The ISS is above you. Look Outside! :)")
 
 
+schedule.every(10).seconds.do(iss_check)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
 
 
 
