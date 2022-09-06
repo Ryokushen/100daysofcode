@@ -49,7 +49,7 @@ def iss_check():
             msg="Subject:International Space Station\n\n The ISS is above you. Look Outside! :)")
 
 
-schedule.every(10).seconds.do(iss_check)
+schedule.every(60).seconds.do(iss_check)
 
 while True:
     schedule.run_pending()
