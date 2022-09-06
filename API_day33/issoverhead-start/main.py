@@ -8,8 +8,8 @@ import time
 
 MY_LAT = 36.755169 # Your latitude
 MY_LONG = -76.237442 # Your longitude
-MY_EMAIL = "ryokushen37.emailtesting@gmail.com"
-MY_PASSWORD = "llywlvusrnovdgok"
+MY_EMAIL = "fakeremail@gmail.com"
+MY_PASSWORD = "reactionary82!"
 
 response = requests.get(url="http://api.open-notify.org/iss-now.json")
 response.raise_for_status()
@@ -38,14 +38,14 @@ sunset = int(data["results"]["sunset"].split("T")[1].split(":")[0])
 
 time_now = datetime.now()
 current_hour = time_now.hour
-# BONUS: run the code every 60 seconds.
+
 
 def iss_check():
     if (compare_pos() == True and sunset <= current_hour) or (compare_pos() == True and current_hour <= sunrise):
         with SMTP("smtp.gmail.com", port=587) as template:
             template.starttls()
             template.login(user=MY_EMAIL, password=MY_PASSWORD)
-            template.sendmail(from_addr=MY_EMAIL, to_addrs='ryokushen37@yahoo.com',
+            template.sendmail(from_addr=MY_EMAIL, to_addrs='fakeemail@gmail.com',
             msg="Subject:International Space Station\n\n The ISS is above you. Look Outside! :)")
 
 
