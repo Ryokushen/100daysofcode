@@ -41,7 +41,7 @@ current_hour = time_now.hour
 # BONUS: run the code every 60 seconds.
 
 def iss_check():
-    if compare_pos() == True and sunset < current_hour < sunrise:
+    if (compare_pos() == True and sunset <= current_hour) or (compare_pos() == True and current_hour <= sunrise):
         with SMTP("smtp.gmail.com", port=587) as template:
             template.starttls()
             template.login(user=MY_EMAIL, password=MY_PASSWORD)
