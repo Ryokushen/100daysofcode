@@ -9,11 +9,10 @@ parameters = {
 }
 
 
-get_questions = requests.get(
-    f'https://opentdb.com/api.php?', params=parameters)
-get_questions.raise_for_status
-new_ques = get_questions.content
-print(new_ques)
+get_questions = requests.get("https://opentdb.com/api.php?", params=parameters)
+get_questions.raise_for_status()
+data = get_questions.json()
+question_data = data["results"]
 
 # question_data = [
 #     {
