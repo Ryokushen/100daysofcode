@@ -1,6 +1,3 @@
-from email import message
-from re import X
-from sqlite3 import connect
 import requests
 import smtplib
 
