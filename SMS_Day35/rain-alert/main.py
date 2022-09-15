@@ -4,9 +4,12 @@ import requests
 API_KEY = "69f04e4613056b159c2761a9d9e664d2"
 OWM_Endpoint = "https://api.openweathermap.org/data/2.5/onecall"
 
+#  "lat": 36.755169,
+#     "lon": -76.237442,
+
 weather_params = {
-    "lat": 36.755169,
-    "lon": -76.237442,
+    "lat": 49.29,
+    "lon": -92.3,
     "appid": API_KEY,
     "exclude": "current,minutely,daily"
 
@@ -20,12 +23,10 @@ first_12 = list_of_weather
 
 first_12_weather = []
 for x in range(0, 12):
-    first_12_weather.append(first_12[x]["weather"])
+    first_12_weather.append(first_12[x]["weather"][0]['id'])
 
-weather_id = []
-for x in first_12_weather:
-    weather_id.append(x[0]['id'])
-
-for num in weather_id:
+weather_status = ""
+for num in first_12_weather:
     if num < 700:
-        print("Bring an umbrella!")
+        weather_status = "Bring an umbrella!"
+print(weather_status)
