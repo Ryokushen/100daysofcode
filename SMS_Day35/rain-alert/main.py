@@ -3,9 +3,9 @@ import smtplib
 
 API_KEY = "69f04e4613056b159c2761a9d9e664d2"
 OWM_Endpoint = "https://api.openweathermap.org/data/2.5/onecall"
-MY_EMAIL = 'ryokushen37.emailtesting@gmail.com'
-MY_PASSWORD = 'bsisfmbvpjecznrq'
-TEST_EMAIL = 'ryokushen37@yahoo.com'
+MY_EMAIL = 'emailtesting@gmail.com'
+MY_PASSWORD = 'blahblahblah'
+TEST_EMAIL = 'testing@gmail.com'
 
 weather_params = {
     "lat": 36.755169,
