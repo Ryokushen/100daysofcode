@@ -1,12 +1,17 @@
 import requests
+import os
 from datetime import date, datetime, timedelta
+
+today = date.today()
+dayofweek = datetime.today().weekday()
 
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
-STOCK_KEYAPI = "K9AB2EEK070XJ3FH"
-NEW_KEYAPI = "2dd413bb81154cc2be2d82674c2e4f5a"
+STOCK_KEYAPI = os.environ.get("STOCKAPIKEY")
+NEW_KEYAPI = os.environ.get("NEWSAPIKEY")
 STOCK_ENDPOINT = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TSLA&apikey=K9AB2EEK070XJ3FH"
-NEWS_ENDPOINT = "https://newsapi.org/v2/everything"
+NEWS_ENDPOINT = f"https://newsapi.org/v2/everything?q=Tesla&from={today}&sortBy=popularity&apiKey=2dd413bb81154cc2be2d82674c2e4f5a"
+
 
 
 r = requests.get(STOCK_ENDPOINT)
@@ -15,9 +20,9 @@ stock_info = r.json()
 
 daily = stock_info["Time Series (Daily)"]
 
-today = date.today()
-dayofweek = datetime.today().weekday()
 
+
+# Compare closing prices
 
 def comparison(num1, num2):
     if num1 == num2:
@@ -27,20 +32,25 @@ def comparison(num1, num2):
     except ZeroDivisionError:
         return 0
 
-
+#Determine whether day of week is weekend or weekday fro search purposes
+#Sunday
 if dayofweek == 6:
     twodaysago = today - timedelta(days=2)
     threedays = today - timedelta(days=3)
     comp3 = float(daily[str(twodaysago)]['4. close'])
     comp4 = float(daily[str(threedays)]['4. close'])
     if comparison(comp3, comp4) < 5:
-        print(True)
-
+        g = requests.get(NEWS_ENDPOINT)
+        g.raise_for_status
+        new_arts = g.json()
+        top_articles = new_arts['articles'][:3]
+        print(top_articles)
+#Monday-Saturday
 else:
-     yest = today - timedelta(days=1)
-     twodaysago = today - timedelta(days=2)
-     comp1 = float(daily[str(yest)]['4. close'])
-     comp2 = float(daily[str(twodaysago)]['4. close'])
+    yest = today - timedelta(days=1)
+    twodaysago = today - timedelta(days=2)
+    comp1 = float(daily[str(yest)]['4. close'])
+    comp2 = float(daily[str(twodaysago)]['4. close'])
    
 
 
