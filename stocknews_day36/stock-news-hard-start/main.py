@@ -1,6 +1,7 @@
 import requests
 import os
 from datetime import date, datetime, timedelta
+from twilio.rest import Client
 
 today = date.today()
 dayofweek = datetime.today().weekday()
@@ -11,7 +12,9 @@ STOCK_KEYAPI = os.environ.get("STOCKAPIKEY")
 NEW_KEYAPI = os.environ.get("NEWSAPIKEY")
 STOCK_ENDPOINT = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TSLA&apikey={STOCK_KEYAPI}"
 NEWS_ENDPOINT = f"https://newsapi.org/v2/everything?q=Tesla&from={today}&sortBy=popularity&apiKey={NEW_KEYAPI}"
-
+account_sid = os.environ.get("TWILIO_SID")
+auth_token = os.environ.get("TWILIO_AUTH")
+#client
 
 
 r = requests.get(STOCK_ENDPOINT)
