@@ -9,8 +9,8 @@ STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
 STOCK_KEYAPI = os.environ.get("STOCKAPIKEY")
 NEW_KEYAPI = os.environ.get("NEWSAPIKEY")
-STOCK_ENDPOINT = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TSLA&apikey=K9AB2EEK070XJ3FH"
-NEWS_ENDPOINT = f"https://newsapi.org/v2/everything?q=Tesla&from={today}&sortBy=popularity&apiKey=2dd413bb81154cc2be2d82674c2e4f5a"
+STOCK_ENDPOINT = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TSLA&apikey={STOCK_KEYAPI}"
+NEWS_ENDPOINT = f"https://newsapi.org/v2/everything?q=Tesla&from={today}&sortBy=popularity&apiKey={NEW_KEYAPI}"
 
 
 
