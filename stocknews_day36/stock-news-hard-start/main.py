@@ -1,8 +1,44 @@
+from urllib import request
+import requests
+from datetime import date, datetime, timedelta
+
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
-
-STOCK_ENDPOINT = "https://www.alphavantage.co/query"
+STOCK_KEYAPI = "K9AB2EEK070XJ3FH"
+NEW_KEYAPI = "2dd413bb81154cc2be2d82674c2e4f5a"
+STOCK_ENDPOINT = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TSLA&apikey=K9AB2EEK070XJ3FH"
 NEWS_ENDPOINT = "https://newsapi.org/v2/everything"
+
+
+r = requests.get(STOCK_ENDPOINT)
+print(r.raise_for_status)
+stock_info = r.json()
+
+daily = stock_info["Time Series (Daily)"]
+
+today = date.today()
+dayofweek = datetime.today().weekday()
+
+if dayofweek == 6:
+    twodaysago = today - timedelta(days=2)
+    threedays = today - timedelta(days=3)
+    comp3 = daily[str(twodaysago)]['4. close']
+    comp4 = daily[str(threedays)]['4. close']
+else:
+     yest = today - timedelta(days=1)
+     twodaysago = today - timedelta(days=2)
+     comp1 = daily[str(yest)]['4. close']
+     comp2 = daily[str(twodaysago)]['4. close']
+   
+
+
+
+
+
+# def comparison(yest, daybeforeyest):
+#     if daily[str(twodaysago)]
+
+
 
 
 ## STEP 1: Use https://newsapi.org/docs/endpoints/everything
