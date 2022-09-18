@@ -1,4 +1,3 @@
-from urllib import request
 import requests
 from datetime import date, datetime, timedelta
 
@@ -19,24 +18,36 @@ daily = stock_info["Time Series (Daily)"]
 today = date.today()
 dayofweek = datetime.today().weekday()
 
+
+def comparison(num1, num2):
+    if num1 == num2:
+        return 100.0
+    try:
+        return (abs(num1 - num2) / num2) * 100.0
+    except ZeroDivisionError:
+        return 0
+
+
 if dayofweek == 6:
     twodaysago = today - timedelta(days=2)
     threedays = today - timedelta(days=3)
-    comp3 = daily[str(twodaysago)]['4. close']
-    comp4 = daily[str(threedays)]['4. close']
+    comp3 = float(daily[str(twodaysago)]['4. close'])
+    comp4 = float(daily[str(threedays)]['4. close'])
+    if comparison(comp3, comp4) < 5:
+        print(True)
+
 else:
      yest = today - timedelta(days=1)
      twodaysago = today - timedelta(days=2)
-     comp1 = daily[str(yest)]['4. close']
-     comp2 = daily[str(twodaysago)]['4. close']
+     comp1 = float(daily[str(yest)]['4. close'])
+     comp2 = float(daily[str(twodaysago)]['4. close'])
    
 
 
 
 
 
-# def comparison(yest, daybeforeyest):
-#     if daily[str(twodaysago)]
+
 
 
 
