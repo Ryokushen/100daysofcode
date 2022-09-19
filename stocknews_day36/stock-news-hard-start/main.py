@@ -3,40 +3,54 @@ import os
 from datetime import date, datetime, timedelta
 from twilio.rest import Client
 
-today = date.today()
-dayofweek = datetime.today().weekday()
-
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
 STOCK_KEYAPI = os.environ.get("STOCKAPIKEY")
 NEW_KEYAPI = os.environ.get("NEWSAPIKEY")
 STOCK_ENDPOINT = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TSLA&apikey={STOCK_KEYAPI}"
-NEWS_ENDPOINT = f"https://newsapi.org/v2/everything?q=Tesla&from={today}&sortBy=popularity&apiKey={NEW_KEYAPI}"
-account_sid = os.environ.get("TWILIO_SID")
-auth_token = os.environ.get("TWILIO_AUTH")
-#client
-
 
 r = requests.get(STOCK_ENDPOINT)
 print(r.raise_for_status)
 stock_info = r.json()
 
+today = date.today()
+NEWS_ENDPOINT = f"https://newsapi.org/v2/everything?q=Tesla&from={today}&sortBy=popularity&apiKey={NEW_KEYAPI}"
+
+
+dayofweek = datetime.today().weekday()
+
 daily = stock_info["Time Series (Daily)"]
 
-
-
 # Compare closing prices
-
 def comparison(num1, num2):
     if num1 == num2:
         return 100.0
     try:
-        return (abs(num1 - num2) / num2) * 100.0
+        return abs((num1 - num2) / num2 * 100.0)
+        
     except ZeroDivisionError:
         return 0
 
+def send_message(listofarts):
+   
+    account_sid = os.environ.get("TWILIO_SID")
+    auth_token = os.environ.get("TWILIO_AUTH")
+    client = Client(account_sid, auth_token)
+
+    for article in listofarts:
+
+        message = client.messages \
+                .create(
+                     body=f"Tesla: {round(comparison(comp3, comp4),2)}\n\nHeadline: {article['title']}\n\nBrief: {article['description']}",
+                     from_='+18147476197',
+                     to='+13218908318'
+                 )
+
+        print(message.sid)
+
 #Determine whether day of week is weekend or weekday fro search purposes
 #Sunday
+
 if dayofweek == 6:
     twodaysago = today - timedelta(days=2)
     threedays = today - timedelta(days=3)
@@ -47,7 +61,10 @@ if dayofweek == 6:
         g.raise_for_status
         new_arts = g.json()
         top_articles = new_arts['articles'][:3]
-        print(top_articles)
+        listofarts = [article for article in top_articles]
+        send_message(listofarts)
+       
+
 #Monday-Saturday
 else:
     yest = today - timedelta(days=1)
@@ -55,6 +72,21 @@ else:
     comp1 = float(daily[str(yest)]['4. close'])
     comp2 = float(daily[str(twodaysago)]['4. close'])
    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
