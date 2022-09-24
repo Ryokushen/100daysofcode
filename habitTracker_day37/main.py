@@ -16,6 +16,7 @@ user_params = {
 # response = requests.post(url=pixela_endpoint, json=user_params)
 # print(response.text)
 
+# Configure/Create a new graph
 graph_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs"
 
 graph_config = {
@@ -31,21 +32,18 @@ headers = {
 # response = requests.post(url=graph_endpoint, json=graph_config, headers=headers)
 # print(response.text)
 
+# Update Graph with Minutes Read
 update_graphendpoint = f"{pixela_endpoint}/{USERNAME}/graphs/{graph_config['id']}"
 
+# Use datetime module and strftime to format date
+
+raw_date = datetime.date.today()
+format_date = raw_date.strftime("%Y%m%d")
 update_graph = {
-    "date": datetime.date.today(),
+    "date": format_date,
     "quantity": "20",
 }
-today = []
-for x in str(update_graph['date']):
-    if x == "-":
-        x = ""
-        today.append(x)
-    else:
-        today.append(x)
-todayjoined = "".join(today)
-update_graph["date"] = todayjoined
 
-response = requests.post(url=update_graphendpoint, json=update_graph, headers=headers)
-print(response.text)
+
+# response = requests.post(url=update_graphendpoint, json=update_graph, headers=headers)
+# print(response.text)
