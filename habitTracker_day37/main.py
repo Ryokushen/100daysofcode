@@ -37,13 +37,23 @@ update_graphendpoint = f"{pixela_endpoint}/{USERNAME}/graphs/{graph_config['id']
 
 # Use datetime module and strftime to format date
 
-raw_date = datetime.date.today()
-format_date = raw_date.strftime("%Y%m%d")
+today = datetime.date.today()
+format_date = today.strftime("%Y%m%d")
 update_graph = {
     "date": format_date,
     "quantity": "20",
 }
 
-
 # response = requests.post(url=update_graphendpoint, json=update_graph, headers=headers)
 # print(response.text)
+
+# Update past pixel / Delete (Change .put or .delete)
+update_pixel = f"{pixela_endpoint}/{USERNAME}/graphs/{graph_config['id']}/{format_date}"
+
+pixel_update = {
+    "quantity": "30"
+}
+
+response = requests.delete(url=update_pixel, json=pixel_update, headers=headers)
+print(response.text)
+
