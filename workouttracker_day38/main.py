@@ -25,6 +25,14 @@ r.raise_for_status()
 api_call = r.json()
 print(api_call)
 
+
+auth = {
+    "Authorization": "insert Bearer token"
+}
+
+
+
+
 # Sheety Data Format For Loop
 for exercise in api_call["exercises"]:
     body = {
@@ -38,7 +46,7 @@ for exercise in api_call["exercises"]:
     }
 
     # Sheety API Endpoint
-    s = requests.post(url=SHEETY_ENDPOINT, json=body)
+    s = requests.post(url=SHEETY_ENDPOINT, json=body, headers=auth)
     print(s.status_code)
     print(s.text)
 
