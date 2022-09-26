@@ -85,7 +85,7 @@ elif dayofweek == 0:
         listofarts = [article for article in top_articles]
         send_message(listofarts, comp3, comp4, arrow)
 
-#Tuesday
+#Tuesday Updated
 elif dayofweek == 1:
     yest = today - timedelta(days=1)
     fourdays = today - timedelta(days=4)
