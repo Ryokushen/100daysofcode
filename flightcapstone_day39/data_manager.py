@@ -10,5 +10,4 @@ class DataManager:
     def __init__(self):
         self.request = requests.get(url=SHEETY_ENDPOINT)
         self.request.raise_for_status
-        r = self.request.json()
-        pprint(r)
+        self.data = self.request.json()
