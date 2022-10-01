@@ -4,7 +4,15 @@ from flight_search import FlightSearch
 
 data_manager = DataManager()
 flight_search = FlightSearch()
+sheet_data = data_manager.data
 
-sheet_data = flight_search.data
+if sheet_data["prices"][0]["iataCode"] == "":
+    for row in sheet_data["prices"]:
+        row["iataCode"] = flight_search.response
 
-print(sheet_data)
+data_manager.destination_data = sheet_data["prices"]
+data_manager.update_dest()
+
+
+
+
