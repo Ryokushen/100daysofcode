@@ -9,19 +9,22 @@ class DataManager:
 
     # This class is responsible for talking to the Google Sheet.
     def __init__(self):
-        self.request = requests.get(url=SHEETY_ENDPOINT)
-        self.request.raise_for_status
-        self.data = self.request.json()
         self.destination_data = {}
 
-    def update_dest(self):
-        for city in self.destination_data:
-            new_data = {
-                "price": {
-                    "iataCode": city['iataCode']
+    def get_data(self):
+        request = requests.get(url=SHEETY_ENDPOINT)
+        data = request.json()['prices']
+        self.destination_data = {city['id']: city['city'] for city in data if city['iataCode'] == ''}
+        return self.destination_data
+
+    def update_iata(self, destination: dict):
+        for id, city in destination.items():
+            body = {
+                'price': {
+                    'iataCode': city,
                 }
             }
-            response = requests.put(url=f"{SHEETY_PUT_ENDPOINT}/{city['id']}", json=new_data)
+            response = requests.put(url=f"{SHEETY_PUT_ENDPOINT}/{id}", json=body)
             print(response.text)
 
 
