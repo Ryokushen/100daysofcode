@@ -4,7 +4,7 @@ import requests
 
 
 KIWI_API = {
-    'apikey': os.getenv('KIWI_API')
+    'apikey': os.environ.get('KIWI_API')
 }
 KIWI_ENDPOINT = 'https://api.tequila.kiwi.com/locations/query'
 
@@ -19,12 +19,13 @@ class FlightSearch:
             new_data = {
                 'term': city
             }
-            response = requests.get(url=KIWI_ENDPOINT, headers=KIWI_API, params=new_data)
+            response = requests.get(
+                url=KIWI_ENDPOINT, headers=KIWI_API, params=new_data)
             response.raise_for_status()
             self.locations[id] = response.json()['locations'][0]['code']
             print(response.text)
         return self.locations
 
-
-
-
+    def search_flights(self):
+        response = requests.get(url=KIWI_ENDPOINT, headers=KIWI_API)
+        response.raise_for_status()
