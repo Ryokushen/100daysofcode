@@ -7,6 +7,7 @@ KIWI_API = {
     'apikey': os.environ.get('KIWI_API')
 }
 KIWI_ENDPOINT = 'https://api.tequila.kiwi.com/locations/query'
+# KIWI_ENDPOINT_FLIGHT = f'https://api.tequila.kiwi.com/v2/search?fly_from=LON&fly_to={}&dateFrom={}&dateTo={}'
 
 
 class FlightSearch:
@@ -26,6 +27,6 @@ class FlightSearch:
             print(response.text)
         return self.locations
 
-    def search_flights(self):
-        response = requests.get(url=KIWI_ENDPOINT, headers=KIWI_API)
-        response.raise_for_status()
+    # def search_flights(self):
+    #     response = requests.get(url=KIWI_ENDPOINT_FLIGHT, headers=KIWI_API)
+    #     response.raise_for_status()
