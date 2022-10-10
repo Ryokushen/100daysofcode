@@ -1,7 +1,7 @@
 from data_manager import DataManager
 import os
 import requests
-
+from datetime import datetime
 
 KIWI_API = {
     'apikey': os.environ.get('KIWI_API')
@@ -27,6 +27,9 @@ class FlightSearch:
             print(response.text)
         return self.locations
 
-    # def search_flights(self):
+    def search_flights(self):
+        for city in self.locations.values():
+            KIWI_ENDPOINT_FLIGHT = f'https://api.tequila.kiwi.com/v2/search?fly_from=LON&fly_to={city}&dateFrom={}&dateTo={}'
+
     #     response = requests.get(url=KIWI_ENDPOINT_FLIGHT, headers=KIWI_API)
     #     response.raise_for_status()

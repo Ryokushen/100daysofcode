@@ -1,6 +1,6 @@
-.idea
-.venv
-.pyc
-__pycache__
-tutorial-env/
+.idea/*
+.venv/*
+.pyc/*
+__pycache__/*
+tutorial-env/*
 /myenv

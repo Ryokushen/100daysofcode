@@ -9,4 +9,4 @@ flight_search = FlightSearch(data_manager)
 # data_manager.update_iata(iata_code)
 
 
-print(flight_search.locations)
+flight_search.search_flights()
