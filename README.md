@@ -8,4 +8,4 @@ a high intermediate level by the time I reach day 100. Along the way I would
 like to become more efficient in the usage of Git and GitHub and
 I intend for my profile to reflect that overall improvement along the way.
 
-Thank you for reading!
+Thank you for reading.
