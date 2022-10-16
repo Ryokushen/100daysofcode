@@ -23,5 +23,12 @@ soup = BeautifulSoup(contents, "html.parser")
 #     pass
 
 # Find individual heading with class
-heading = soup.find(name="h1", id="name")
-print(heading)
+# heading = soup.find(name="h1", id="name")
+# print(heading)
+
+# section_heading = soup.find(name="h3", class_="heading")
+# print(section_heading)
+
+# Find tag within another tag/id
+company_url = soup.select_one(selector="p a")
+print(company_url)
