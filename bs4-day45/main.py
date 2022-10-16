@@ -30,5 +30,5 @@ soup = BeautifulSoup(contents, "html.parser")
 # print(section_heading)
 
 # Find tag within another tag/id
-company_url = soup.select_one(selector="p a")
-print(company_url)
+# company_url = soup.select_one(selector="p a")
+# print(company_url)
