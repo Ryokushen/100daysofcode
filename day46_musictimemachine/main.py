@@ -9,7 +9,7 @@ soup_mix = music_pull.text
 
 
 soup = BeautifulSoup(soup_mix, "html.parser")
-# fresh_soup = soup.prettify()
+
 
 songs_name = soup.select("h3.c-title.a-no-trucate")
 song = [song.get_text().strip() for song in songs_name]
